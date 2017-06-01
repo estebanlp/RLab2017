@@ -1,0 +1,264 @@
+- Class: meta
+  Course: RLab2017
+  Lesson: RLab2017_googleVis
+  Author: Esteban Lopez Ochoa
+  Type: Standard
+  Organization: Universidad Adolfo Ibáñez
+  Version: 2.4.3
+
+
+- Class: text
+  Output: Welcome to the googleVis tutorial.This is an interactive tutorial based on the package googleVis.This tutorial has been extended to work with Chilean data to show the potential uses of R and googleVis to showcase data and results in  that are aligned to the research objectives of the Center of Regional Economics and Policy (CEPR) at the Universidad Adolfo Ibanez, Vina del Mar. Hit return so we can start!
+
+- Class: text
+  Output: When you loaded this course I have installed the googlevis package using the traditional install.packages function and the data.table in case you didn't have it.
+  
+- Class: cmd_question
+  Output: Now that all has been installed, load the package googleVis.
+  CorrectAnswer: library(googleVis)
+  AnswerTests: omnitest(correctExpr='library(googleVis)')
+  Hint: Just type library(googleVis).
+
+- Class: text
+  Output: Now let's start by creating a simple data frame of three countries with 2 variables.
+  
+- Class: cmd_question
+  Output: Copy and paste the following code to create a data.frame. df<-data.frame(country=c("US", "GB", "BR"), val1=c(10,13,14), val2=c(23,12,32))
+  CorrectAnswer: df<-data.frame(country=c('US', 'GB', 'BR'), val1=c(10,13,14), val2=c(23,12,32))
+  AnswerTests: omnitest(correctExpr="df<-data.frame(country=c('US', 'GB', 'BR'), val1=c(10,13,14),val2=c(23,12,32))")
+  Hint: Make sure you didn't miss any commans or parethesis.
+
+- Class: cmd_question
+  Output: Now print your new data.frame object in the console by typing it's name
+  CorrectAnswer: df 
+  AnswerTests: omnitest(correctExpr='df')
+  Hint: The name of the data.frame object is whatever is before the sing "<-".
+  
+- Class: cmd_question
+  Output: Now what is the structure of your data.frame object?
+  CorrectAnswer: str(df)
+  AnswerTests: omnitest(correctExpr='str(df)')
+  Hint: use the function str()
+
+- Class: cmd_question
+  Output: Now, let's start using googleVis. Create a new object called "Line" by applying gvisLineChart() function over your entire data set.
+  CorrectAnswer: Line<-gvisLineChart(df)
+  AnswerTests: omnitest(correctExpr='Line<-gvisLineChart(df)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Line object.
+  CorrectAnswer: plot(Line)
+  AnswerTests: omnitest(correctExpr='plot(Line)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: text
+  Output: As you can see, your default internet explorer must have opened showing your line graph. In this graph you can move the mouse around and you will see the particular values of the graph. As you may imagine, this function took the first column of names and use it as the categories, for the use the two value columns in the df object and used them as the series to plot.
+  
+- Class: cmd_question
+  Output: Now, how can you change the code to only plot one of the series? Do it all in one line using the functions plot and gvisLineChart.
+  CorrectAnswer: plot(gvisLineChart(df[,1:2]))
+  AnswerTests: omnitest(correctExpr='plot(gvisLineChart(df[,1:2]))')
+  Hint: Remember you can use a function over another such as plot(gvisLineChart())
+  
+- Class: cmd_question
+  Output: Now, let's create a bar plot object called Bar, using the gvisBarChart() fucntion.Then plot it just as you did before.
+  CorrectAnswer: Bar <- gvisBarChart(df)
+  AnswerTests: omnitest(correctExpr='Bar <- gvisBarChart(df)')
+  Hint: Look at your previous answer
+  
+- Class: cmd_question
+  Output: Now, let's plot the Bar object.
+  CorrectAnswer: plot(Bar)
+  AnswerTests: omnitest(correctExpr='plot(Bar)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+
+- Class: text
+  Output: Now that you got the basics of googleVis, let's jump into one of the main plots we will be creating at CEPR. The Motion Chart, is an interactive plot that allow to visualize data in time. This is, the Motion Chart let us you see the evolution of some variables in time. Let's see and example.
+
+- Class: text
+  Output: Let's use the Fruits data that comes pre-loaded in the googleVis package.
+  
+- Class: cmd_question
+  Output: Call the data and print it in your console by simply typing the name and hitting return.
+  CorrectAnswer: Fruits
+  AnswerTests: omnitest(correctExpr='Fruits')
+  Hint: Just type Fruits
+  
+- Class: cmd_question
+  Output: Now can you find out what is the structure of the data?
+  CorrectAnswer: str(Fruits)
+  AnswerTests: omnitest(correctExpr='str(Fruits)')
+  Hint: Just type Fruits
+  
+- Class: mult_question
+  Output: In what shape format is the data?
+  AnswerChoices: Long;Wide
+  CorrectAnswer: Long
+  AnswerTests: omnitest(correctVal='Long')
+  Hint: Look closer at the data, is there a time variable? Could some of the variables be organized differently?
+
+- Class: text
+  Output: Now let's create a motion chart.
+  
+- Class: cmd_question
+  Output: Create an object called Motion using the function gvisMotionChart(), use the Fruits data as the first argument, the variable Fruit as the idvar argument, and the variable Year as the timevar argument. Remember to type the names of the variables with single quuotes.
+  CorrectAnswer: Motion<-gvisMotionChart(Fruits, idvar='Fruit', timevar='Year')
+  AnswerTests: omnitest(correctExpr="Motion<-gvisMotionChart(Fruits, idvar='Fruit', timevar='Year')")
+  Hint: Shall we see the help of this function? Type ?gvisMotionChart
+
+- Class: cmd_question
+  Output: Now, let's plot the Motion object.
+  CorrectAnswer: plot(Motion)
+  AnswerTests: omnitest(correctExpr='plot(Motion)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+- Class: text
+  Output: Great work so far. Now, remember the Chile GDP data by regions, sectors and years? We used this data in the Lab05 of our course, I have preloaded the gdpRegiones2 object that is a data.frame with the GDP of Chile by regions and sectors from 2013-2015
+  
+- Class: cmd_question
+  Output: Now what is the structure of your gdpRegiones2 data.frame object?
+  CorrectAnswer: str(gdpRegiones2)
+  AnswerTests: omnitest(correctExpr='str(gdpRegiones2)')
+  Hint: use the function str()
+
+- Class: text
+  Output: Now, let's think about our data structure to find out what are the posibilities of plots that we can do. Most data sets are constructed of at least two parts. a) Observations (also called unit of analysis) which tells you what are the subjects being analyzed.  b) Variables of data for each unit of analysis. This variables can either represent specific characteristics of the data (such as age, or gender) or represent levels in which the observations can be aggregated (time [months, years], space[regions, municipalities]).
+  
+- Class: mult_question
+  Output: Now that you understand the structure of your data. What is the unit of analysis (observations) of the data? 
+  AnswerChoices: GDP by Sectors;GDP by Regions;GDP by Years;
+  CorrectAnswer: Sectors
+  AnswerTests: omnitest(correctVal='GDP by Sectors')
+  Hint: Look closer at the data, remember that the unit of analysis is the lowest level of observations available.
+
+- Class: script
+  Output: What are the variables that represent spatial agregation? Create a new vector named space with only the names of those variables for spatial agregation. After you hit Return (Enter), a script window will open where you have to type your answer, after you are done, just save the script and type "submit()" in your console so I can evaluate your answer.
+  AnswerTests: test_script1()
+  Hint: don't forget to use the functions names() and c()
+  Script: script1.R
+
+- Class: text
+  Output: "Now, since the data's observation level are sectors and regions let's create a new data.table object that shows the GDP by regions 
+    and years. Remember that this entails aggregating the data, but no reshape is nedded. This means we can use the benefits of data.table to 
+    aggregate using the by argument"
+
+- Class: cmd_question
+  Output: But first let's check if the gdpRegiones2 object is a data.table or not
+  CorrectAnswer: class(gdpRegiones2)
+  AnswerTests: omnitest(correctExpr='class(gdpRegiones2)')
+  Hint: use the function class()
+
+- Class: cmd_question
+  Output: "Now, let's aggregate the data using the fucntion sum() in the desired column and the by argument. Remember that the structure is object[rows,.(function(colums)),by=.(idvariables)]"
+  CorrectAnswer: gdpRegiones2[,sum(GDP),by=.(Ano,region13)]
+  AnswerTests: omnitest(correctExpr='gdpRegiones2[,sum(GDP),by=.(Ano,region13)]')
+  Hint: don't forget to use the commas to indicate where is the sum and the by go. Also remember the =.() functions in data.table?
+
+- Class: cmd_question
+  Output: "As you can see, this only prints the data.table to your screen, now do the same but assign the new table to a new object called gdpRegiones3"
+  CorrectAnswer: gdpRegiones3<-gdpRegiones2[,sum(GDP),by=.(Ano,region13)]
+  AnswerTests: omnitest(correctExpr='gdpRegiones3<-gdpRegiones2[,sum(GDP),by=.(Ano,region13)]')
+  Hint: don't forget to use the commas to indicate where is the sum and the by go. Also remember the =.() functions in data.table?
+
+- Class: text
+  Output: Now let's create a motion chart based on this new data.
+  
+- Class: cmd_question
+  Output: Use the create an object called Motion2 using the function gvisMotionChart(), use the gdpRegiones3 data as the first argument, the variable region13 as the idvar argument, and the variable Ano as the timevar argument. Remember to type the names of the variables with single quuotes.
+  CorrectAnswer: Motion2<-gvisMotionChart(gdpRegiones3, idvar='region13', timevar='Ano')
+  AnswerTests: omnitest(correctExpr="Motion2<-gvisMotionChart(gdpRegiones3, idvar='region13', timevar='Ano')")
+  Hint: Shall we see the help of this function? Type ?gvisMotionChart
+
+- Class: cmd_question
+  Output: Now, let's plot the Motion2 object.
+  CorrectAnswer: plot(Motion2)
+  AnswerTests: omnitest(correctExpr='plot(Motion2)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+- Class: text
+  Output: How do you think the data would be better?.
+
+- Class: cmd_question
+  Output: Let's try creating a line chart instead. Create a new object called "Line2" by applying gvisLineChart() function over your gdpRegiones3 entire data set.
+  CorrectAnswer: Line2<-gvisLineChart(gdpRegiones3)
+  AnswerTests: omnitest(correctExpr='Line2<-gvisLineChart(gdpRegiones3)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Line2 object.
+  CorrectAnswer: plot(Line2)
+  AnswerTests: omnitest(correctExpr='plot(Line2)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+- Class: mult_question
+  Output: What do you think, is it better?. As you may realize the new plot has considered the variable Ano as the y-axis and the variable region13 as a variable that is plotting. What do you think we should do?
+  AnswerChoices: Reshape to wide format;Reshape to long format
+  CorrectAnswer: Reshape to wide format
+  AnswerTests: omnitest(correctVal='Reshape to wide format')
+  Hint: Think of the graph you are building, what are the legends showing? 
+
+- Class: cmd_question
+  Output: Now, let's create a new object gdpRegiones4 that is the result of a reshape to the object gdpRegiones3, to have regions on the rows and years in the columns.
+  CorrectAnswer: gdpRegiones4<-reshape(gdpRegiones3,direction = "wide",v.names ="V1",idvar = "region13",timevar = "Ano")
+  AnswerTests: omnitest(correctExpr='gdpRegiones4<-reshape(gdpRegiones3,direction = "wide",v.names ="V1",idvar = "region13",timevar = "Ano")')
+  Hint: Remember to use the v.names, idvar and timevar arguments.
+
+- Class: cmd_question
+  Output: Now, let's create again the object called "Line2" by applying gvisLineChart() function over your gdpRegiones4 entire data set.
+  CorrectAnswer: Line2<-gvisLineChart(gdpRegiones4)
+  AnswerTests: omnitest(correctExpr='Line2<-gvisLineChart(gdpRegiones4)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Line2 object again.
+  CorrectAnswer: plot(Line2)
+  AnswerTests: omnitest(correctExpr='plot(Line2)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now it seems to be plotting well, however visually the graph is not as nice since the GDP hasn't changed much for each region. Create a new object called "Bar2" by applying gvisBarChart() function over your gdpRegiones4 entire data set.
+  CorrectAnswer: Bar2<-gvisBarChart(gdpRegiones4)
+  AnswerTests: omnitest(correctExpr='Bar2<-gvisBarChart(gdpRegiones4)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Bar2 object.
+  CorrectAnswer: plot(Bar2)
+  AnswerTests: omnitest(correctExpr='plot(Bar2)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: As you can see this looks a little better, but how would it look a Column chart? . Create a new object called "Col2" by applying gvisColumnChart() function over your gdpRegiones4 entire data set.
+  CorrectAnswer: Col2<-gvisColumnChart(gdpRegiones4)
+  AnswerTests: omnitest(correctExpr='Col2<-gvisColumnChart(gdpRegiones4)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Col2 object.
+  CorrectAnswer: plot(Col2)
+  AnswerTests: omnitest(correctExpr='plot(Col2)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, what if we want to have the regions as the legend and the years in the x-axis? Let's create a new object gdpRegiones5 that is the result of a reshape to the object gdpRegiones3, to have years on the rows and regions in the columns.
+  CorrectAnswer: gdpRegiones5<-reshape(gdpRegiones3,direction = "wide",v.names ="V1",idvar = "Ano",timevar = "region13")
+  AnswerTests: omnitest(correctExpr='gdpRegiones5<-reshape(gdpRegiones3,direction = "wide",v.names ="V1",idvar = "Ano",timevar = "region13")')
+  Hint: Remember to use the v.names, idvar and timevar arguments.
+
+- Class: cmd_question
+  Output: Now let's try the line graph again but using the gdpRegiones5 object. Replace the Line2 object.
+  CorrectAnswer: Line2<-gvisLineChart(gdpRegiones5)
+  AnswerTests: omnitest(correctExpr='Line2<-gvisLineChart(gdpRegiones5)')
+  Hint: Remember using the question mark followed by any fucntion to search for help regarding that topic.
+
+- Class: cmd_question
+  Output: Now, let's plot the Line2 object.
+  CorrectAnswer: plot(Line2)
+  AnswerTests: omnitest(correctExpr='plot(Line2)')
+  Hint: Remember using the question mark followed by any function to search for help regarding that topic.
+
+- Class: text
+  Output: As you can see, by combining your knowledge of data structure with the capabilities of data.table, reshape and the googleVis package, we can do many things to analyze and showcase regional data on the web! This is the end of the course. Congratulations for your hard work!!
+  
